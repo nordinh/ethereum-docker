@@ -6,36 +6,21 @@ rapidly using Docker.
 We provide full Ethereum test nodes (using the [Ethereum Go client](https://github.com/ethereum/go-ethereum) with all APIs enabled by default as well as a monitoring dashboard (for the cluster version) provided
 via [Netstats](https://github.com/cubedro/eth-netstats).
 
-#### Alternative projects
-
-TestRPC - [https://github.com/ethereumjs/testrpc](https://github.com/ethereumjs/testrpc)
-
 ## Getting started
 
 ### Local Development
 
 #### Standalone Ethereum node
 
-**Prerequisites**
-
-Docker Toolbox installed. To download and install Docker Toolbox for your environment please
-follow [the Docker Toolbox instructions](https://www.docker.com/products/docker-toolbox). After Docker Toolbox has been installed create a ```default``` machine to run Docker against.
-
-**Lets go**
-
-To run a single test Ethereum node run the following:
-
 ```
 docker-compose -f docker-compose-standalone.yml up -d
 ```
 
-If using docker-machine you should be able to get to the JSON RPC client by doing:
+To access the JavaScript console:
 
 ```
-open http://$(docker-machine ip default):8545
+./js-console.sh
 ```
-
-Assuming you ran docker-compose against the ```default``` machine.
 
 #### Ethereum Cluster with netstats monitoring
 
@@ -54,7 +39,7 @@ By default this will create:
 To access the Netstats Web UI:
 
 ```
-open http://$(docker-machine ip default):3000
+./dashboard.sh
 ```
 
 ##### Scaling the number of nodes/containers in the cluster
@@ -74,14 +59,6 @@ pre-filled with 20 Ether for use in transactions by default.
 
 If you want to change the amount of Ether for those accounts
 See ```files/genesis.json```.
-
-#### Interact with geth
-
-If you want to start mining or stop mining you need to connect to the node via:
-```
-docker exec -it ethereumdocker_geth_1 geth attach ipc://root/.ethereum/devchain/geth.ipc
-```
-Replace ethereumdocker_geth_1 with the container name you wish to connect to.
 
 #### Use existing DAG
 
